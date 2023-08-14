@@ -8,3 +8,10 @@ type PoliControllerInterface interface {
 	EditPoli(data basemodel.RequestUpdateBaseModel, id int) (code int, message string)
 	DeletePoli(id int) (code int, message string)
 }
+
+type TypePasienControllerInterface interface {
+	DataTypePasien(pagination basemodel.TypePasienPaginationBaseModel) (code int, data []basemodel.TypePasienDataBaseModel, count int64, message string)
+	TambahTypePasien(data basemodel.TypePasienRequestInsertBaseModel) (code int, message string)
+	EditTypePasien(data basemodel.TypePasienRequestUpdateBaseModel, id int) (code int, message string)
+	DeleteTypePasien(id int) (code int, message string)
+}

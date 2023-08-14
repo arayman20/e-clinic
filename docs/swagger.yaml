@@ -39,6 +39,24 @@ definitions:
       size:
         type: integer
     type: object
+  basemodel.TypePasienRequestInsertBaseModel:
+    properties:
+      codeName:
+        type: string
+      name:
+        type: string
+      status:
+        type: boolean
+    type: object
+  basemodel.TypePasienRequestUpdateBaseModel:
+    properties:
+      codeName:
+        type: string
+      name:
+        type: string
+      status:
+        type: boolean
+    type: object
 info:
   contact: {}
   description: Documentation API E-Clinic
@@ -211,6 +229,172 @@ paths:
       summary: Data Edit Poli
       tags:
       - Management Poli
+  /type-pasien:
+    get:
+      consumes:
+      - application/json
+      description: Data Master Type Pasien
+      parameters:
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Number of items per page
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/basemodel.ResponseRequestPagination'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+      security:
+      - api_key: []
+      summary: Data Master Type Pasien
+      tags:
+      - Management Type Pasien
+    post:
+      consumes:
+      - application/json
+      description: Data Tambah Type Pasien
+      parameters:
+      - description: Create user body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/basemodel.TypePasienRequestInsertBaseModel'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+      security:
+      - api_key: []
+      summary: Data Tambah Type Pasien
+      tags:
+      - Management Type Pasien
+  /type-pasien/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Data Delete Type Pasien
+      parameters:
+      - description: Type Pasien ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+      security:
+      - api_key: []
+      summary: Data Delete Type Pasien
+      tags:
+      - Management Type Pasien
+    put:
+      consumes:
+      - application/json
+      description: Data Edit Type Pasien
+      parameters:
+      - description: Type Pasien ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Create user body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/basemodel.TypePasienRequestUpdateBaseModel'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+      security:
+      - api_key: []
+      summary: Data Edit Type Pasien
+      tags:
+      - Management Type Pasien
 securityDefinitions:
   api_key:
     in: header

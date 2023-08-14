@@ -49,5 +49,6 @@ func main() {
 		router.GET("/swagger/*any", controller.CorsOriginsMiddleware(), ginSwagger.WrapHandler(swaggerFiles.Handler, swaggerURL))
 	}
 	routes.PoliRoutes(router.Group("/api/e-clinic/v1", controller.CorsOriginsMiddleware()), &poliController)
+	routes.TypePasienRoutes(router.Group("/api/e-clinic/v1", controller.CorsOriginsMiddleware()), &typePasienController)
 	router.Run(":" + os.Getenv("PORT_SWAGGER"))
 }
