@@ -1,0 +1,219 @@
+basePath: /api/e-clinic/v1
+definitions:
+  basemodel.RequestInsertBaseModel:
+    properties:
+      antreanCode:
+        type: string
+      codeName:
+        type: string
+      name:
+        type: string
+      status:
+        type: boolean
+    type: object
+  basemodel.RequestUpdateBaseModel:
+    properties:
+      antreanCode:
+        type: string
+      codeName:
+        type: string
+      name:
+        type: string
+      status:
+        type: boolean
+    type: object
+  basemodel.ResponseError:
+    properties:
+      message:
+        type: string
+    type: object
+  basemodel.ResponseRequestPagination:
+    properties:
+      data: {}
+      message:
+        type: string
+      page:
+        type: integer
+      rows:
+        type: integer
+      size:
+        type: integer
+    type: object
+info:
+  contact: {}
+  description: Documentation API E-Clinic
+  title: E-Clinic
+  version: "1.0"
+paths:
+  /poli:
+    get:
+      consumes:
+      - application/json
+      description: Data Master Poli
+      parameters:
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Number of items per page
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/basemodel.ResponseRequestPagination'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+      security:
+      - api_key: []
+      summary: Data Master Poli
+      tags:
+      - Management Poli
+    post:
+      consumes:
+      - application/json
+      description: Data Tambah Poli
+      parameters:
+      - description: Create user body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/basemodel.RequestInsertBaseModel'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+      security:
+      - api_key: []
+      summary: Data Tambah Poli
+      tags:
+      - Management Poli
+  /poli/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Data Delete Poli
+      parameters:
+      - description: Poli ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+      security:
+      - api_key: []
+      summary: Data Delete Poli
+      tags:
+      - Management Poli
+    put:
+      consumes:
+      - application/json
+      description: Data Edit Poli
+      parameters:
+      - description: Poli ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Create user body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/basemodel.RequestUpdateBaseModel'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+      security:
+      - api_key: []
+      summary: Data Edit Poli
+      tags:
+      - Management Poli
+securityDefinitions:
+  api_key:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
