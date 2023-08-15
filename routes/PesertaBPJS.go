@@ -9,6 +9,7 @@ import (
 func PesertaBPJSRoutes(routesPoint *gin.RouterGroup, pesertaBPJSController *controller.PesertaBPJSController) {
 	mainRouter := routesPoint.Group("/peserta-bpjs")
 	mainRouter.GET("", pesertaBPJSController.DataPesertaBPJS)
+	mainRouter.GET("/many2many", pesertaBPJSController.DataPesertaBPJSMenyToMany)
 	mainRouter.POST("", pesertaBPJSController.TambahPesertaBPJS)
 	mainRouter.PUT("/:id", pesertaBPJSController.EditPesertaBPJS)
 	mainRouter.DELETE("/:id", pesertaBPJSController.DeletePesertaBPJS)

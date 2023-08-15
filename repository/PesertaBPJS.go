@@ -2,6 +2,7 @@ package repository
 
 import (
 	"errors"
+	"fmt"
 	"klinik/basemodel"
 
 	"gorm.io/gorm"
@@ -29,6 +30,28 @@ func (conn *PesertaBPJSConn) DataPesertaBPJS(pagination basemodel.PesertaBPJSPag
 		Offset((pagination.Page - 1) * pagination.Size).
 		Find(&data)
 
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, 0, nil
+		}
+		return nil, 0, result.Error
+	}
+	if len(data) == 0 {
+		return nil, 0, nil
+	}
+	return data, count, nil
+
+}
+
+func (conn *PesertaBPJSConn) DataPesertaBPJSMenyToMany() (data []basemodel.PesertaBPJS, count int64, err error) {
+	if conn.Err != nil {
+		return nil, 0, conn.Err
+	}
+
+	db := conn.DB.Preload("ManyToManyRecord").Model(&basemodel.PesertaBPJS{})
+	result := db.
+		Find(&data)
+	fmt.Println(data)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, 0, nil

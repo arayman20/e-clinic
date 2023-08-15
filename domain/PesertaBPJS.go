@@ -49,6 +49,29 @@ func (dom *PesertaBPJSDomain) DataPesertaBPJS(pagination basemodel.PesertaBPJSPa
 	return 200, data, count, "Data Peserta BPJS With Medical Record"
 }
 
+func (dom *PesertaBPJSDomain) DataPesertaBPJSMenyToMany() (code int, data []basemodel.PesertaBPJSWithMedicalRecordBaseModel, count int64, message string) {
+	result, count, err := dom.PesertaBPJSRepo.DataPesertaBPJSMenyToMany()
+	if result == nil && err == nil {
+		return 404, nil, count, "Data not found!"
+	}
+	if err != nil {
+		return 500, nil, count, "Internal Server Error"
+	}
+
+	for _, rowsData := range result {
+		data = append(data, basemodel.PesertaBPJSWithMedicalRecordBaseModel{
+			Id:          rowsData.Id,
+			NoBPJS:      rowsData.NoBPJS,
+			Name:        rowsData.Name,
+			BirthDate:   *rowsData.BirthDate,
+			Address:     rowsData.Address,
+			FaskesLevel: rowsData.FaskesLevel,
+			FaskesName:  rowsData.FaskesName,
+		})
+	}
+	return 200, data, count, "Data Peserta BPJS With Medical Record"
+}
+
 func (dom *PesertaBPJSDomain) TambahPesertaBPJS(data basemodel.PesertaBPJSRequestInsertBaseModel) (code int, message string) {
 	result, err := dom.PesertaBPJSRepo.GetPesertaBPJSByNoBPJS(data.NoBPJS)
 	if result != nil {

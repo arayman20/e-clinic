@@ -440,6 +440,39 @@ paths:
       summary: Data Edit Peserta BPJS
       tags:
       - Management Peserta BPJS
+  /peserta-bpjs/many2many:
+    get:
+      consumes:
+      - application/json
+      description: Data Peserta BPJS Many TO Many
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/basemodel.ResponseRequestPagination'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+      security:
+      - api_key: []
+      summary: Data Peserta BPJS Many TO Many
+      tags:
+      - Management Peserta BPJS
   /poli:
     get:
       consumes:

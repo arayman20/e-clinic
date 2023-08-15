@@ -58,6 +58,42 @@ func (cc *PesertaBPJSController) DataPesertaBPJS(c *gin.Context) {
 }
 
 // Peserta BPJS godoc
+// @Summary Data Peserta BPJS Many TO Many
+// @Description Data Peserta BPJS Many TO Many
+// @Tags Management Peserta BPJS
+// @Accept json
+// @Produce json
+// @security api_key
+// @Success 200 {object} basemodel.ResponseRequestPagination
+// @Failure 400 {object} basemodel.ResponseError
+// @Failure 401 {object} basemodel.ResponseError
+// @Failure 403 {object} basemodel.ResponseError
+// @Failure 500 {object} basemodel.ResponseError
+// @Router /peserta-bpjs/many2many [get]
+func (cc *PesertaBPJSController) DataPesertaBPJSMenyToMany(c *gin.Context) {
+	c.Writer.Header().Set("Content-Type", "application/json")
+
+	var responseError basemodel.ResponseError
+	var responseSuccess basemodel.ResponseRequestPagination
+
+	code, data, rows, message := cc.Service.DataPesertaBPJSMenyToMany()
+	if code != 200 {
+		responseError.Message = message
+		c.Writer.WriteHeader(code)
+		json.NewEncoder(c.Writer).Encode(responseError)
+		return
+	}
+	responseSuccess.Data = data
+	responseSuccess.Message = message
+	responseSuccess.Size = 0
+	responseSuccess.Page = 0
+	responseSuccess.Rows = int(rows)
+	c.Writer.WriteHeader(code)
+	json.NewEncoder(c.Writer).Encode(responseSuccess)
+
+}
+
+// Peserta BPJS godoc
 // @Summary Data Tambah Peserta BPJS
 // @Description Data Tambah Peserta BPJS
 // @Tags Management Peserta BPJS

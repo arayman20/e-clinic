@@ -38,6 +38,7 @@ type PesertaBPJSInterface interface {
 	TambahPesertaBPJS(addData basemodel.PesertaBPJSRequestInsertBaseModel) (err error)
 	EditPesertaBPJS(editData basemodel.PesertaBPJSRequestUpdateBaseModel, id int) (err error)
 	DeletePesertaBPJS(id int) (err error)
+	DataPesertaBPJSMenyToMany() (data []basemodel.PesertaBPJS, count int64, err error)
 }
 
 type PoliInterface interface {
