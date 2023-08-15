@@ -22,7 +22,7 @@ func (conn *MedicalRecordConn) DataMedicalRecord(pagination basemodel.MedicalRec
 	if err != nil {
 		return nil, 0, err
 	}
-	result := db.Debug().
+	result := db.
 		Order("Id DESC").
 		Limit(pagination.Size).
 		Offset((pagination.Page - 1) * pagination.Size).
@@ -94,6 +94,6 @@ func (conn *MedicalRecordConn) DeletePesertaBPJS(id int) (err error) {
 	if conn.Err != nil {
 		return conn.Err
 	}
-	result := conn.DB.Debug().Where(&basemodel.PesertaBPJS{Id: id}).Delete(&basemodel.PesertaBPJS{})
+	result := conn.DB.Where(&basemodel.PesertaBPJS{Id: id}).Delete(&basemodel.PesertaBPJS{})
 	return result.Error
 }
