@@ -13,6 +13,7 @@ type PesertaBPJSConn struct {
 }
 
 func (conn *PesertaBPJSConn) DataPesertaBPJS(pagination basemodel.PesertaBPJSPaginationBaseModel) (data []basemodel.PesertaBPJS, count int64, err error) {
+	// one to many query dan one to one
 	if conn.Err != nil {
 		return nil, 0, conn.Err
 	}
@@ -34,43 +35,14 @@ func (conn *PesertaBPJSConn) DataPesertaBPJS(pagination basemodel.PesertaBPJSPag
 		}
 		return nil, 0, result.Error
 	}
-
-	// for _, dataPeserta := range dataRows {
-	// 	var medicalRecord []basemodel.MedicalRecordBaseModel
-	// 	if dataPeserta.OneToManyMedicalRecord != nil {
-	// 		for _, dataMedical := range dataPeserta.OneToManyMedicalRecord {
-	// 			medicalRecord = append(medicalRecord, basemodel.MedicalRecordBaseModel{
-	// 				Id:           dataMedical.Id,
-	// 				NoBPJS:       dataMedical.NoBPJS,
-	// 				DateRegister: dataMedical.DateRegister,
-	// 				TimeRegister: dataMedical.TimeRegister,
-	// 				PoliId:       dataMedical.PoliId,
-	// 				PoliName:     dataMedical.OneToOnePoli.Name,
-	// 				Tension:      dataMedical.Tension,
-	// 				Weight:       dataMedical.Weight,
-	// 				Complain:     dataMedical.Complain,
-	// 				Handling:     dataMedical.Handling,
-	// 			})
-	// 		}
-	// 		data = append(data, basemodel.PesertaBPJSWithMedicalRecordBaseModel{
-	// 			Id:                     dataPeserta.Id,
-	// 			NoBPJS:                 dataPeserta.NoBPJS,
-	// 			Name:                   dataPeserta.Name,
-	// 			BirthDate:              *dataPeserta.BirthDate,
-	// 			Address:                dataPeserta.Address,
-	// 			FaskesLevel:            dataPeserta.FaskesLevel,
-	// 			FaskesName:             dataPeserta.FaskesName,
-	// 			OneToManyMedicalRecord: medicalRecord,
-	// 		})
-
-	// 	}
-	// }
-
+	if len(data) == 0 {
+		return nil, 0, nil
+	}
 	return data, count, nil
 
 }
 
-func (conn *PesertaBPJSConn) GetPesertaBPJSByNoBPJS(noBpjs int) (data *basemodel.PesertaBPJS, err error) {
+func (conn *PesertaBPJSConn) GetPesertaBPJSByNoBPJS(noBpjs string) (data *basemodel.PesertaBPJS, err error) {
 	if conn.Err != nil {
 		return nil, conn.Err
 	}

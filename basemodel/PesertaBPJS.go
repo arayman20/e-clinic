@@ -3,19 +3,20 @@ package basemodel
 import "time"
 
 type PesertaBPJS struct {
-	Id                     int                 `gorm:"type:bigint;primaryKey;autoIncrement;index"`
-	NoBPJS                 int                 `gorm:"type:bigint;index"`
-	OneToManyMedicalRecord []MedicalRecordBPJS `gorm:"foreignKey:NoBPJS"`
-	Name                   string              `gorm:"type:varchar;index"`
-	BirthDate              *time.Time          `gorm:"type:date"`
-	Address                string              `gorm:"type:varchar"`
-	FaskesLevel            string              `gorm:"type:varchar"`
-	FaskesName             string              `gorm:"type:varchar"`
+	Id                     int                  `gorm:"type:bigint;primaryKey;autoIncrement;index"`
+	OneToManyMedicalRecord []MedicalRecordBPJS  `gorm:"foreignKey:PesertaId"`
+	NoBPJS                 string               `gorm:"type:varchar;index"`
+	Name                   string               `gorm:"type:varchar;index"`
+	BirthDate              *time.Time           `gorm:"type:date"`
+	Address                string               `gorm:"type:varchar"`
+	FaskesLevel            string               `gorm:"type:varchar"`
+	FaskesName             string               `gorm:"type:varchar"`
+	ManyToManyRecord       []*MedicalRecordBPJS `gorm:"many2many:peserta"`
 }
 
 type PesertaBPJSDataBaseModel struct {
 	Id          int       `json:"id"`
-	NoBPJS      int       `json:"noBPJS"`
+	NoBPJS      string    `json:"noBPJS"`
 	Name        string    `json:"name"`
 	BirthDate   time.Time `json:"birthDate"`
 	Address     string    `json:"address"`
@@ -25,7 +26,7 @@ type PesertaBPJSDataBaseModel struct {
 
 type PesertaBPJSWithMedicalRecordBaseModel struct {
 	Id                     int         `json:"id"`
-	NoBPJS                 int         `json:"noBPJS"`
+	NoBPJS                 string      `json:"noBPJS"`
 	Name                   string      `json:"name"`
 	BirthDate              time.Time   `json:"birthDate"`
 	Address                string      `json:"address"`
@@ -40,7 +41,7 @@ type PesertaBPJSPaginationBaseModel struct {
 }
 
 type PesertaBPJSRequestInsertBaseModel struct {
-	NoBPJS      int    `json:"noBPJS"`
+	NoBPJS      string `json:"noBPJS"`
 	Name        string `json:"name"`
 	BirthDate   string `json:"birthDate"`
 	Address     string `json:"address"`

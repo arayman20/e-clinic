@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  backend:
+    image: NAMAIMAGE
+    container_name: NAMACONTAINER
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - ENVIRONMENT=DEV
+      - DATABASE_PORT=PORT
+      - DATABASE_USER=USER
+      - DATABASE_PASSWRD=PASSWORD
+      - DATABASE_NAME=DATABASE
+      - DATABASE_HOSTNAME=1HOST
+      - DATABASE_HOST=postgres
+      - DATABASE_SSLMODE=disable
+      - DATABASE_TIMEZONE=Asia/Jakarta
+      - SWAGGER=1
+      - PORT_SWAGGER=4000
+      - PATH_LOG=/home/arief/log_microservice/other
+      - AUTO_DELETE_LOG=7
+      - IP_SWAGGER=172.16.2.220
+      - MIGRATION=INACTIVE

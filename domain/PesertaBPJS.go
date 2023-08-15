@@ -24,10 +24,8 @@ func (dom *PesertaBPJSDomain) DataPesertaBPJS(pagination basemodel.PesertaBPJSPa
 			for _, dataMedicalRecord := range rowsData.OneToManyMedicalRecord {
 				dataMedical = append(dataMedical, basemodel.MedicalRecordBaseModel{
 					Id:           dataMedicalRecord.Id,
-					NoBPJS:       dataMedicalRecord.NoBPJS,
 					DateRegister: dataMedicalRecord.DateRegister,
 					TimeRegister: dataMedicalRecord.TimeRegister,
-					PoliId:       dataMedicalRecord.PoliId,
 					PoliName:     dataMedicalRecord.OneToOnePoli.Name,
 					Tension:      dataMedicalRecord.Tension,
 					Weight:       dataMedicalRecord.Weight,

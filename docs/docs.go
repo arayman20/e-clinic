@@ -16,6 +16,264 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/medical-record": {
+            "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "Data Medical Record",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Management Medical Record"
+                ],
+                "summary": "Data Medical Record",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Number of items per page",
+                        "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseRequestPagination"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "Data Tambah Medical Record",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Management Medical Record"
+                ],
+                "summary": "Data Tambah Medical Record",
+                "parameters": [
+                    {
+                        "description": "Create Medical Record body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.MedicalRecordRequestInsertBaseModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/medical-record/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "Data Edit Medical Record",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Management Medical Record"
+                ],
+                "summary": "Data Edit Medical Record",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Medical Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Edit Medical Record body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.PesertaBPJSRequestUpdateBaseModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "Data Delete Medical Record",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Management Medical Record"
+                ],
+                "summary": "Data Delete Medical Record",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Medical Record ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
         "/peserta-bpjs": {
             "get": {
                 "security": [
@@ -792,6 +1050,29 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "basemodel.MedicalRecordRequestInsertBaseModel": {
+            "type": "object",
+            "properties": {
+                "complain": {
+                    "type": "string"
+                },
+                "handling": {
+                    "type": "string"
+                },
+                "pesertaId": {
+                    "type": "integer"
+                },
+                "poliId": {
+                    "type": "integer"
+                },
+                "tension": {
+                    "type": "string"
+                },
+                "weight": {
+                    "type": "integer"
+                }
+            }
+        },
         "basemodel.PesertaBPJSRequestInsertBaseModel": {
             "type": "object",
             "properties": {
@@ -811,7 +1092,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "noBPJS": {
-                    "type": "integer"
+                    "type": "string"
                 }
             }
         },

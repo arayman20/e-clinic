@@ -22,3 +22,10 @@ type PesertaBPJSControllerInterface interface {
 	EditPesertaBPJS(data basemodel.PesertaBPJSRequestUpdateBaseModel, id int) (code int, message string)
 	DeletePesertaBPJS(id int) (code int, message string)
 }
+
+type MedicalRecordControllerInterface interface {
+	DataPesertaBPJS(pagination basemodel.MedicalRecordPaginationBaseModel) (code int, data []basemodel.MedicalRecordBaseModel, count int64, message string)
+	TambahMedicalRecord(data basemodel.MedicalRecordRequestInsertBaseModel) (code int, message string)
+	EditMedicalRecord(data basemodel.MedicalRecordRequestUpdateBaseModel, id int) (code int, message string)
+	DeleteMedicalRecord(id int) (code int, message string)
+}

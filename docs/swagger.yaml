@@ -1,5 +1,20 @@
 basePath: /api/e-clinic/v1
 definitions:
+  basemodel.MedicalRecordRequestInsertBaseModel:
+    properties:
+      complain:
+        type: string
+      handling:
+        type: string
+      pesertaId:
+        type: integer
+      poliId:
+        type: integer
+      tension:
+        type: string
+      weight:
+        type: integer
+    type: object
   basemodel.PesertaBPJSRequestInsertBaseModel:
     properties:
       address:
@@ -13,7 +28,7 @@ definitions:
       name:
         type: string
       noBPJS:
-        type: integer
+        type: string
     type: object
   basemodel.PesertaBPJSRequestUpdateBaseModel:
     properties:
@@ -93,6 +108,172 @@ info:
   title: E-Clinic
   version: "1.0"
 paths:
+  /medical-record:
+    get:
+      consumes:
+      - application/json
+      description: Data Medical Record
+      parameters:
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Number of items per page
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/basemodel.ResponseRequestPagination'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+      security:
+      - api_key: []
+      summary: Data Medical Record
+      tags:
+      - Management Medical Record
+    post:
+      consumes:
+      - application/json
+      description: Data Tambah Medical Record
+      parameters:
+      - description: Create Medical Record body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/basemodel.MedicalRecordRequestInsertBaseModel'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+      security:
+      - api_key: []
+      summary: Data Tambah Medical Record
+      tags:
+      - Management Medical Record
+  /medical-record/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Data Delete Medical Record
+      parameters:
+      - description: Medical Record ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+      security:
+      - api_key: []
+      summary: Data Delete Medical Record
+      tags:
+      - Management Medical Record
+    put:
+      consumes:
+      - application/json
+      description: Data Edit Medical Record
+      parameters:
+      - description: Medical Record ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Edit Medical Record body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/basemodel.PesertaBPJSRequestUpdateBaseModel'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+      security:
+      - api_key: []
+      summary: Data Edit Medical Record
+      tags:
+      - Management Medical Record
   /peserta-bpjs:
     get:
       consumes:

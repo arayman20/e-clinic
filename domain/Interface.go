@@ -33,7 +33,7 @@ type PaginationPoli struct {
 
 type PesertaBPJSInterface interface {
 	DataPesertaBPJS(pagination basemodel.PesertaBPJSPaginationBaseModel) (data []basemodel.PesertaBPJS, count int64, err error)
-	GetPesertaBPJSByNoBPJS(noBpjs int) (data *basemodel.PesertaBPJS, err error)
+	GetPesertaBPJSByNoBPJS(noBpjs string) (data *basemodel.PesertaBPJS, err error)
 	GetPesertaBPJSById(id int) (data *basemodel.PesertaBPJS, err error)
 	TambahPesertaBPJS(addData basemodel.PesertaBPJSRequestInsertBaseModel) (err error)
 	EditPesertaBPJS(editData basemodel.PesertaBPJSRequestUpdateBaseModel, id int) (err error)
@@ -56,4 +56,13 @@ type TypePasienInterface interface {
 	TambahTypePasien(data basemodel.TypePasienRequestInsertBaseModel) (err error)
 	EditTypePasien(editData basemodel.TypePasienRequestUpdateBaseModel, id int) (err error)
 	DeleteTypePasien(id int) (err error)
+}
+
+type MedicalRecordInterface interface {
+	DataMedicalRecord(pagination basemodel.MedicalRecordPaginationBaseModel) (data []basemodel.MedicalRecordBPJS, count int64, err error)
+	MedicalrecordGetPesertaBPJSByNoBPJS(noBpjs string) (data *basemodel.PesertaBPJS, err error)
+	MedicalrecordGetPesertaBPJSById(id int) (data *basemodel.PesertaBPJS, err error)
+	TambahMedicalRecord(addData basemodel.MedicalRecordRequestInsertBaseModel) (err error)
+	EditMedicalRecord(editData basemodel.MedicalRecordRequestUpdateBaseModel, id int) (err error)
+	DeletePesertaBPJS(id int) (err error)
 }
