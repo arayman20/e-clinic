@@ -16,6 +16,264 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/peserta-bpjs": {
+            "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "Data Peserta BPJS WITH Medical Record",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Management Peserta BPJS"
+                ],
+                "summary": "Data Peserta BPJS WITH Medical Record",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Number of items per page",
+                        "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseRequestPagination"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "Data Tambah Peserta BPJS",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Management Peserta BPJS"
+                ],
+                "summary": "Data Tambah Peserta BPJS",
+                "parameters": [
+                    {
+                        "description": "Create Peserta BPJS body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.PesertaBPJSRequestInsertBaseModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/peserta-bpjs/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "Data Edit Peserta BPJS",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Management Peserta BPJS"
+                ],
+                "summary": "Data Edit Peserta BPJS",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Peserta BPJS ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Edit Peserta BPJS body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.PesertaBPJSRequestUpdateBaseModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "Data Delete Peserta BPJS",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Management Peserta BPJS"
+                ],
+                "summary": "Data Delete Peserta BPJS",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Peserta BPJS ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/basemodel.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
         "/poli": {
             "get": {
                 "security": [
@@ -534,6 +792,52 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "basemodel.PesertaBPJSRequestInsertBaseModel": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "birthDate": {
+                    "type": "string"
+                },
+                "faskesLevel": {
+                    "type": "string"
+                },
+                "faskesName": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "noBPJS": {
+                    "type": "integer"
+                }
+            }
+        },
+        "basemodel.PesertaBPJSRequestUpdateBaseModel": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "birthDate": {
+                    "type": "string"
+                },
+                "faskesLevel": {
+                    "type": "string"
+                },
+                "faskesName": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "noBPJS": {
+                    "type": "string"
+                }
+            }
+        },
         "basemodel.RequestInsertBaseModel": {
             "type": "object",
             "properties": {

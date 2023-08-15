@@ -7,25 +7,17 @@ import (
 	"gorm.io/gorm"
 )
 
-type Poli struct {
-	Id          int    `gorm:"type:bigint;primaryKey;autoIncrement;index"`
-	AntreanCode string `gorm:"type:varchar"`
-	CodeName    string `gorm:"varchar"`
-	Name        string `gorm:"varchar"`
-	Status      bool   `gorm:"type:boolean;default:True"`
-}
-
 type PoliConn struct {
 	DB  *gorm.DB
 	Err error
 }
 
-func (conn *PoliConn) DataPoli(pagination basemodel.PoliPaginationBaseModel) (data []basemodel.PoliDataBaseModel, count int64, err error) {
+func (conn *PoliConn) DataPoli(pagination basemodel.PoliPaginationBaseModel) (data []basemodel.Poli, count int64, err error) {
 	if conn.Err != nil {
 		return nil, 0, conn.Err
 	}
 
-	db := conn.DB.Model(&Poli{})
+	db := conn.DB.Model(&basemodel.Poli{})
 	err = db.Count(&count).Error
 	if err != nil {
 		return nil, 0, err
@@ -45,12 +37,12 @@ func (conn *PoliConn) DataPoli(pagination basemodel.PoliPaginationBaseModel) (da
 
 }
 
-func (conn *PoliConn) GetPoliByCodeName(codeName string) (data *basemodel.PoliDataBaseModel, err error) {
+func (conn *PoliConn) GetPoliByCodeName(codeName string) (data *basemodel.Poli, err error) {
 	if conn.Err != nil {
 		return nil, conn.Err
 	}
 
-	result := conn.DB.Model(&Poli{}).Where(&Poli{CodeName: codeName}).First(&data)
+	result := conn.DB.Model(&basemodel.Poli{}).Where(&basemodel.Poli{CodeName: codeName}).First(&data)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, nil
@@ -60,12 +52,12 @@ func (conn *PoliConn) GetPoliByCodeName(codeName string) (data *basemodel.PoliDa
 	return data, nil
 }
 
-func (conn *PoliConn) GetPoliById(id int) (data *basemodel.PoliDataBaseModel, err error) {
+func (conn *PoliConn) GetPoliById(id int) (data *basemodel.Poli, err error) {
 	if conn.Err != nil {
 		return nil, conn.Err
 	}
 
-	result := conn.DB.Model(&Poli{}).Where(&Poli{Id: id}).First(&data)
+	result := conn.DB.Model(&basemodel.Poli{}).Where(&basemodel.Poli{Id: id}).First(&data)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, nil
@@ -88,8 +80,8 @@ func (conn *PoliConn) EditPoli(editData basemodel.RequestUpdateBaseModel, id int
 	if conn.Err != nil {
 		return conn.Err
 	}
-	result := conn.DB.Model(&Poli{}).
-		Where(&Poli{Id: id}).
+	result := conn.DB.Model(&basemodel.Poli{}).
+		Where(&basemodel.Poli{Id: id}).
 		Updates(editData)
 	return result.Error
 }
@@ -98,6 +90,6 @@ func (conn *PoliConn) DeletePoli(id int) (err error) {
 	if conn.Err != nil {
 		return conn.Err
 	}
-	result := conn.DB.Delete(&Poli{Id: id})
+	result := conn.DB.Delete(&basemodel.Poli{Id: id})
 	return result.Error
 }

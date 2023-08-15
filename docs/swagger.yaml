@@ -1,5 +1,35 @@
 basePath: /api/e-clinic/v1
 definitions:
+  basemodel.PesertaBPJSRequestInsertBaseModel:
+    properties:
+      address:
+        type: string
+      birthDate:
+        type: string
+      faskesLevel:
+        type: string
+      faskesName:
+        type: string
+      name:
+        type: string
+      noBPJS:
+        type: integer
+    type: object
+  basemodel.PesertaBPJSRequestUpdateBaseModel:
+    properties:
+      address:
+        type: string
+      birthDate:
+        type: string
+      faskesLevel:
+        type: string
+      faskesName:
+        type: string
+      name:
+        type: string
+      noBPJS:
+        type: string
+    type: object
   basemodel.RequestInsertBaseModel:
     properties:
       antreanCode:
@@ -63,6 +93,172 @@ info:
   title: E-Clinic
   version: "1.0"
 paths:
+  /peserta-bpjs:
+    get:
+      consumes:
+      - application/json
+      description: Data Peserta BPJS WITH Medical Record
+      parameters:
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Number of items per page
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/basemodel.ResponseRequestPagination'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+      security:
+      - api_key: []
+      summary: Data Peserta BPJS WITH Medical Record
+      tags:
+      - Management Peserta BPJS
+    post:
+      consumes:
+      - application/json
+      description: Data Tambah Peserta BPJS
+      parameters:
+      - description: Create Peserta BPJS body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/basemodel.PesertaBPJSRequestInsertBaseModel'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+      security:
+      - api_key: []
+      summary: Data Tambah Peserta BPJS
+      tags:
+      - Management Peserta BPJS
+  /peserta-bpjs/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Data Delete Peserta BPJS
+      parameters:
+      - description: Peserta BPJS ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+      security:
+      - api_key: []
+      summary: Data Delete Peserta BPJS
+      tags:
+      - Management Peserta BPJS
+    put:
+      consumes:
+      - application/json
+      description: Data Edit Peserta BPJS
+      parameters:
+      - description: Peserta BPJS ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Edit Peserta BPJS body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/basemodel.PesertaBPJSRequestUpdateBaseModel'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/basemodel.ResponseError'
+      security:
+      - api_key: []
+      summary: Data Edit Peserta BPJS
+      tags:
+      - Management Peserta BPJS
   /poli:
     get:
       consumes:

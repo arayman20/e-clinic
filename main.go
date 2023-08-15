@@ -35,12 +35,15 @@ func main() {
 
 	poliRepo := repository.PoliConn{DB: db, Err: err}
 	typePasienRepo := repository.TypePasienConn{DB: db, Err: err}
+	pesertaBPJSRepo := repository.PesertaBPJSConn{DB: db, Err: err}
 
 	poliService := domain.PoliDomain{PoliRepo: &poliRepo}
 	typePasienService := domain.TypePasienDomain{TypePasienRepo: &typePasienRepo}
+	pesertaBPJSService := domain.PesertaBPJSDomain{PesertaBPJSRepo: &pesertaBPJSRepo}
 
 	poliController := controller.PoliController{Service: &poliService}
 	typePasienController := controller.TypePasienController{Service: &typePasienService}
+	pesertaBPJSController := controller.PesertaBPJSController{Service: &pesertaBPJSService}
 
 	router := gin.Default()
 	router.Use(gin.Recovery())
@@ -50,5 +53,6 @@ func main() {
 	}
 	routes.PoliRoutes(router.Group("/api/e-clinic/v1", controller.CorsOriginsMiddleware()), &poliController)
 	routes.TypePasienRoutes(router.Group("/api/e-clinic/v1", controller.CorsOriginsMiddleware()), &typePasienController)
+	routes.PesertaBPJSRoutes(router.Group("/api/e-clinic/v1", controller.CorsOriginsMiddleware()), &pesertaBPJSController)
 	router.Run(":" + os.Getenv("PORT_SWAGGER"))
 }

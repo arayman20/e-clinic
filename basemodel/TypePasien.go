@@ -1,5 +1,12 @@
 package basemodel
 
+type TypePasien struct {
+	Id       int    `gorm:"type:bigint;primaryKey;autoIncrement;index"`
+	CodeName string `gorm:"varchar"`
+	Name     string `gorm:"varchar"`
+	Status   bool   `gorm:"type:boolean;default:True"`
+}
+
 type TypePasienDataBaseModel struct {
 	Id       int    `json:"id"`
 	CodeName string `json:"codeName"`

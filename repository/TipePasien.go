@@ -7,24 +7,17 @@ import (
 	"gorm.io/gorm"
 )
 
-type TypePasien struct {
-	Id       int    `gorm:"type:bigint;primaryKey;autoIncrement;index"`
-	CodeName string `gorm:"varchar"`
-	Name     string `gorm:"varchar"`
-	Status   bool   `gorm:"type:boolean;default:True"`
-}
-
 type TypePasienConn struct {
 	DB  *gorm.DB
 	Err error
 }
 
-func (conn *TypePasienConn) DataTypePasien(pagination basemodel.TypePasienPaginationBaseModel) (data []basemodel.TypePasienDataBaseModel, count int64, err error) {
+func (conn *TypePasienConn) DataTypePasien(pagination basemodel.TypePasienPaginationBaseModel) (data []basemodel.TypePasien, count int64, err error) {
 	if conn.Err != nil {
 		return nil, 0, conn.Err
 	}
 
-	db := conn.DB.Model(&TypePasien{})
+	db := conn.DB.Model(&basemodel.TypePasien{})
 	err = db.Count(&count).Error
 	if err != nil {
 		return nil, 0, err
@@ -44,12 +37,12 @@ func (conn *TypePasienConn) DataTypePasien(pagination basemodel.TypePasienPagina
 
 }
 
-func (conn *TypePasienConn) GetTypePasienByCodeName(codeName string) (data *basemodel.TypePasienDataBaseModel, err error) {
+func (conn *TypePasienConn) GetTypePasienByCodeName(codeName string) (data *basemodel.TypePasien, err error) {
 	if conn.Err != nil {
 		return nil, conn.Err
 	}
 
-	result := conn.DB.Model(&TypePasien{}).Where(&TypePasien{CodeName: codeName}).First(&data)
+	result := conn.DB.Model(&basemodel.TypePasien{}).Where(&basemodel.TypePasien{CodeName: codeName}).First(&data)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, nil
@@ -59,12 +52,12 @@ func (conn *TypePasienConn) GetTypePasienByCodeName(codeName string) (data *base
 	return data, nil
 }
 
-func (conn *TypePasienConn) GetTypePasienById(id int) (data *basemodel.TypePasienDataBaseModel, err error) {
+func (conn *TypePasienConn) GetTypePasienById(id int) (data *basemodel.TypePasien, err error) {
 	if conn.Err != nil {
 		return nil, conn.Err
 	}
 
-	result := conn.DB.Model(&TypePasien{}).Where(&TypePasien{Id: id}).First(&data)
+	result := conn.DB.Model(&basemodel.TypePasien{}).Where(&basemodel.TypePasien{Id: id}).First(&data)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil, nil
@@ -87,8 +80,8 @@ func (conn *TypePasienConn) EditTypePasien(editData basemodel.TypePasienRequestU
 	if conn.Err != nil {
 		return conn.Err
 	}
-	result := conn.DB.Model(&TypePasien{}).
-		Where(&TypePasien{Id: id}).
+	result := conn.DB.Model(&basemodel.TypePasien{}).
+		Where(&basemodel.TypePasien{Id: id}).
 		Updates(editData)
 	return result.Error
 }
@@ -97,6 +90,6 @@ func (conn *TypePasienConn) DeleteTypePasien(id int) (err error) {
 	if conn.Err != nil {
 		return conn.Err
 	}
-	result := conn.DB.Delete(&TypePasien{Id: id})
+	result := conn.DB.Delete(&basemodel.TypePasien{Id: id})
 	return result.Error
 }

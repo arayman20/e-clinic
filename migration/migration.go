@@ -1,15 +1,20 @@
 package migration
 
 import (
-	"klinik/repository"
+	"klinik/basemodel"
 
 	"gorm.io/gorm"
 )
 
 func Migrate(db *gorm.DB) {
-	db.AutoMigrate(&repository.Poli{})
-	db.AutoMigrate(&repository.TypePasien{})
-	db.AutoMigrate(&repository.PesertaBPJS{})
-	db.AutoMigrate(&repository.AntreanBPJS{})
+	db.Migrator().DropTable(&basemodel.TypePasien{},
+		&basemodel.Poli{},
+		&basemodel.PesertaBPJS{},
+		&basemodel.MedicalRecordBPJS{})
+
+	db.AutoMigrate(&basemodel.TypePasien{})
+	db.AutoMigrate(&basemodel.Poli{})
+	db.AutoMigrate(&basemodel.PesertaBPJS{})
+	db.AutoMigrate(&basemodel.MedicalRecordBPJS{})
 
 }

@@ -1,5 +1,13 @@
 package basemodel
 
+type Poli struct {
+	Id          int    `gorm:"type:bigint;primaryKey;autoIncrement;index"`
+	AntreanCode string `gorm:"type:varchar"`
+	CodeName    string `gorm:"varchar"`
+	Name        string `gorm:"varchar"`
+	Status      bool   `gorm:"type:boolean;default:True"`
+}
+
 type PoliDataBaseModel struct {
 	Id          int    `json:"id"`
 	AntreanCode string `json:"antreanCode"`
